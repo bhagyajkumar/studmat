@@ -6,6 +6,9 @@ class University(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name_plural = "Universities"
 
 class Branch(models.Model):
     name = models.CharField(max_length=200)
@@ -13,6 +16,9 @@ class Branch(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.university.name})"
+    
+    class Meta:
+        verbose_name_plural = "Branches"
 
 class Semester(models.Model):
     name = models.CharField(max_length=100)
