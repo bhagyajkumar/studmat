@@ -1,7 +1,7 @@
 from django.db import models
 
 class University(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     description = models.TextField()
 
     def __str__(self):
@@ -11,8 +11,12 @@ class University(models.Model):
         verbose_name_plural = "Universities"
 
 class Branch(models.Model):
+    slug = models.CharField(max_length=20)
     name = models.CharField(max_length=200)
     university = models.ForeignKey(University, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("university","slug")
 
     def __str__(self):
         return f"{self.name} ({self.university.name})"
